@@ -6,8 +6,11 @@
 //  Copyright (c) 2014 dohnal. All rights reserved.
 //
 
-#ifndef obrazky_ImageListViewController_h
-#define obrazky_ImageListViewController_h
+@class ImageDetailViewController;
 
+@protocol ImageDetailViewControllerDelegate <NSObject>
 
-#endif
+@optional
+-(void) imageDetailViewControllerWillClose:(ImageDetailViewController *) imageDetailController;
+
+@end

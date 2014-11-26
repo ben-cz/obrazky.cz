@@ -8,6 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ImageDetailView : UIScrollView
+@interface ImageDetailView : UIScrollView <UIScrollViewDelegate>{
+     CGRect imageViewFrame;
+}
 
+@property (nonatomic, strong) UIImageView *imageView;
+
+-(void) setImageViewFrame: (CGRect) frame;
+-(void)zoomBack;
 @end

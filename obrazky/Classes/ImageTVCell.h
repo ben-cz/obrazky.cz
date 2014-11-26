@@ -8,6 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ImageCell : UITableViewCell
+@interface ImageTVCell : UITableViewCell
+
+
+@property (weak, nonatomic) IBOutlet UIImageView *imageThbView;
+@property (weak, nonatomic) IBOutlet UILabel *nameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *sizeLabel;
 
 @end

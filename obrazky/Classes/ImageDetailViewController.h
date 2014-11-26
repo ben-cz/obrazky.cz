@@ -7,7 +7,30 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ImageInfo.h"
+#import "ImageDetailView.h"
+#import "ImageListViewController.h"
+#import "ImageTVCell.h"
+#import "ImageDetailViewControllerDelegate.h"
 
-@interface ImageDetailViewController : UIViewController
+@interface ImageDetailViewController : UIViewController<UIScrollViewDelegate>
 
+@property (strong, nonatomic) UIView *contentView;
+@property (strong, nonatomic) UIScrollView *scrollView;
+
+@property (strong, nonatomic) NSArray *imagesInfoList;
+@property (strong, nonatomic) NSMutableArray *imageDetailViews;
+
+@property (strong, nonatomic) UIImage *imageThb;
+@property (strong, nonatomic) UIImage *image;
+@property (strong, nonatomic) ImageDetailView *animateImageDetailView;
+@property (strong, nonatomic) UIImageView *imageView;
+
+@property (strong, nonatomic) id<ImageDetailViewControllerDelegate> delegate;
+
+-(instancetype)initWithImageInfoList:(NSArray *) imagesInfoList;
+
+-(void)startAnimationShowWithParentView:(UIViewController *) parentViewController
+                           imageThbView:(UIImageView *) imageThbView
+                              imageInfo:(ImageInfo *) imageInfo;
 @end

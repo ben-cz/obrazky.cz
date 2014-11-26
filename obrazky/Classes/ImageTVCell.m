@@ -6,8 +6,21 @@
 //  Copyright (c) 2014 dohnal. All rights reserved.
 //
 
-#import "ImageCell.h"
+#import "ImageTVCell.h"
 
-@implementation ImageCell
+@implementation ImageTVCell
+
+@synthesize imageThbView, nameLabel, sizeLabel;
+
+- (id) init
+{
+    self = [super init];
+    if (self) {
+        // Initialization code
+        
+        
+    }
+    return self;
+}
 
 @end

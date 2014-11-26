@@ -7,7 +7,18 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "ImageListResourcesDelegate.h"
+#import "RESTResourcesDelegate.h"
+#import "RESTResources.h"
+#import "TFHpple.h"
+#import "ImageInfo.h"
 
-@interface ImageListResources : NSObject
+#define URL_OBRAZKY @"http://obrazky.cz/searchAjax"
 
+@interface ImageListResources : NSObject <RESTResourceDelegate>
+
+@property (nonatomic, strong) id<ImageListResourcesDelegate> delegate;
+
+-(id) initWithDelegate: (id<ImageListResourcesDelegate>) delegate;
+-(void)getImagesInfoListFilterName: (NSString *)filterName from: (NSInteger)from step: (NSInteger) step;
 @end

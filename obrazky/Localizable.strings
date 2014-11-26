@@ -5,3 +5,8 @@
   Created by Jakub Dohnal on 26/11/14.
   Copyright (c) 2014 dohnal. All rights reserved.
 */
+"Done" = "Hotovo";
+"Err network" = "Chyba sítě";
+"Err server return: %d" = "Server vrátil: %d";
+"Error" = "Chyba!";
+"Ok" = "Ok";

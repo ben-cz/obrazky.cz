@@ -7,6 +7,19 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "RESTResourcesDelegate.h"
+
+#define CONTENT_TYPE @"Content-Type"
+#define CONTENT_LENGHT @"Content-Length"
+#define ACCEPT @"Accept"
+#define ACCEPT_LANGUAGE @"Accept-Language"
+#define LANGUAGE_CS @"cs"
+#define REST_DOMAIN @"rest"
+
+#define GET_TYPE @"GET"
+
+#define URLENCODED @"application/x-www-form-urlencoded"
+#define APPJSON @"application/json"
 
 typedef NS_ENUM(NSInteger, kHTTPStatusCode) {
     kHTTPStatusCodeOK = 200,
@@ -19,9 +32,13 @@ typedef NS_ENUM(NSInteger, kHTTPStatusCode) {
 
 @interface RESTResources : NSObject
 
+@property (nonatomic, strong) id<RESTResourceDelegate> delegate;
+@property (nonatomic, strong) NSURLConnection *connection;
+@property (nonatomic, strong) NSMutableData *recievedData;
+
 - (id)initWithDelegate:(id<RESTResourceDelegate>)delegate;
 
-- (void)startGetRequestWithParams:(NSDictionary *)params;
+- (void)startGetRequestWithUrl: (NSString *) url params:(NSDictionary *)params;
 - (void)cancelRequest;
 
 @end

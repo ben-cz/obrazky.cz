@@ -8,6 +8,14 @@
 
 #import <Foundation/Foundation.h>
 
-@interface ImageListResourcesDelegate : NSObject
+@class ImageListResources;
+
+@protocol ImageListResourcesDelegate <NSObject>
+
+- (void)request:(ImageListResources *)request didFinishWithImageList:(NSArray *)imageList;
+
+@optional
+- (void)requestDidFailLoading:(ImageListResources *)request;
+- (void)request:(ImageListResources *)request didFinishWithError:(NSError *)error;
 
 @end

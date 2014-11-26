@@ -6,8 +6,19 @@
 //  Copyright (c) 2014 dohnal. All rights reserved.
 //
 
-#ifndef obrazky_RESTResourcesDelegate_h
-#define obrazky_RESTResourcesDelegate_h
+#import <Foundation/Foundation.h>
 
+@class RESTResources;
 
-#endif
+@protocol RESTResourceDelegate <NSObject>
+
+@required
+- (void)request:(RESTResources *)request didFinishWithData:(NSData *)resourceData;
+
+@optional
+- (void)request:(RESTResources *)request didReceiveHeader:(NSDictionary *)header statusCode:(NSInteger)statusCode;
+- (void)requestDidFailLoading:(RESTResources *)request;
+- (void)requestDidStart:(RESTResources *)request;
+- (void)request:(RESTResources *)request didFinishWithError:(NSError *)error;
+
+@end
