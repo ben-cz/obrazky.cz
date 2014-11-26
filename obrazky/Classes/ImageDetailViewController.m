@@ -71,14 +71,12 @@
     _navBarShow = YES;
 }
 
--(void)startAnimationShowWithParentView:(ImageListViewController *) parentViewController
+-(void)showWithParentView:(ImageListViewController *) parentViewController
                            imageThbView:(UIImageView *) imageThbView
                               imageInfo:(ImageInfo *) imageInfo{
     _currentShowPage = [self.imagesInfoList indexOfObject:imageInfo];
     
-    CGSize size;
     CGRect finalImageFrame;
-    CGPoint center;
     
     NSUInteger index = [self.imagesInfoList indexOfObject:imageInfo];
     CGRect screenFrame = parentViewController.view.bounds;
@@ -98,54 +96,49 @@
     [self.contentView addSubview:self.animateImageDetailView];
 
     
-    center = [self.contentView convertPoint:imageThbView.center fromView:imageThbView.superview];
-    //CGRect frame = [sender convertRect:sender.bounds toView:self.view];
-    self.animateImageDetailView.imageView.image = imageThbView.image;
-    self.animateImageDetailView.imageView.frame = imageThbView.bounds;
-    
+    //get curent image position
+    CGPoint center = [self.contentView convertPoint:imageThbView.center fromView:imageThbView.superview];
     CGSize imageSize = imageThbView.image.size;
     float scale = imageThbView.frame.size.height/imageSize.height;
     CGRect imageViewRect = CGRectMake(0, 0, imageSize.width*scale, imageSize.height*scale);
+    self.animateImageDetailView.imageView.image = imageThbView.image;
     self.animateImageDetailView.imageView.frame = imageViewRect;
-    
-    [self.animateImageDetailView.imageView setCenter:center];
+    self.animateImageDetailView.imageView.center = center;
 
-    CGPoint centerC = self.contentView.center;
-    size = [self sizeThatFitsInSize:[self imageSizeToFit] initialSize:imageThbView.image.size];
-    finalImageFrame.size = size;
-    finalImageFrame.origin.x = 0;
-    finalImageFrame.origin.y = 0;
-    float scaleFinal = finalImageFrame.size.width/imageViewRect.size.width;
+    //get scale
+    CGSize finalImageSize;
+    finalImageSize = [self sizeThatFitsInSize:[self imageSizeToFit] initialSize:imageThbView.image.size];
+    float scaleFinal = finalImageSize.width/imageViewRect.size.width;
     
     [UIView animateWithDuration:0.3 delay:0.0 options:UIViewAnimationOptionCurveLinear
                      animations:^{
-                         self.animateImageDetailView.imageView.center = centerC;
+                         self.animateImageDetailView.imageView.center = self.animateImageDetailView.center;
                          self.animateImageDetailView.imageView.transform=CGAffineTransformMakeScale(scaleFinal, scaleFinal);
                          
                          self.view.layer.backgroundColor = [UIColor blackColor].CGColor;
                      }
                      completion:^(BOOL finished) {
-                         self.animateImageDetailView.imageView.frame = finalImageFrame;
-                         [self createImageSlideView];
+                         self.scrollView = [self createImageSlideView];
                          [self.scrollView setContentOffset:CGPointMake((index)*self.contentView.frame.size.width, 0) animated:NO];
                          self.animateImageDetailView.hidden = YES;
+                         
                          [self setControllView];
                      }];
     
     
 }
 
--(void) createImageSlideView{
-    self.scrollView = [[UIScrollView alloc] initWithFrame:self.contentView.bounds];
+-(UIScrollView *) createImageSlideView{
+    UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:self.contentView.bounds];
     
-    [self.contentView addSubview:self.scrollView];
+    [self.contentView addSubview:scrollView];
     
-    self.scrollView.showsVerticalScrollIndicator = NO;
-    self.scrollView.showsHorizontalScrollIndicator = NO;
-    self.scrollView.decelerationRate = UIScrollViewDecelerationRateFast;
-    self.scrollView.delegate = self;
-    self.scrollView.pagingEnabled = YES;
-    self.scrollView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    scrollView.showsVerticalScrollIndicator = NO;
+    scrollView.showsHorizontalScrollIndicator = NO;
+    scrollView.decelerationRate = UIScrollViewDecelerationRateFast;
+    scrollView.delegate = self;
+    scrollView.pagingEnabled = YES;
+    scrollView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     
     for (ImageInfo *imageInfo in self.imagesInfoList) {
         CGRect rec = self.contentView.bounds;
@@ -153,8 +146,9 @@
         [self.imageDetailViews addObject:idv];
         [self setImage:[[UIImage alloc] init] toImageDetailView:idv];
         [self cacheImage:imageInfo setToImageDetailView:idv];
-        [self addRightToScrollListView:idv];
+        [self addRightToScrollView:scrollView view:idv];
     }
+    return scrollView;
 }
 
 -(void) setImage:(UIImage *)image toImageDetailView:(ImageDetailView *)imageDetailView{
@@ -173,15 +167,15 @@
     return CGSizeMake(self.contentView.bounds.size.width, self.contentView.bounds.size.height - (2*NAVBAR_HEIGHT));
 }
 
--(void) addRightToScrollListView:(UIView *)view{
+-(void) addRightToScrollView: (UIScrollView *) scrollView view:(UIView *)view{
     
-    CGRect frame = CGRectMake(self.scrollView.contentSize.width, 0, view.frame.size.width, view.frame.size.height);
+    CGRect frame = CGRectMake(scrollView.contentSize.width, 0, view.frame.size.width, view.frame.size.height);
     view.frame = frame;
     
-    [self.scrollView addSubview:view];
+    [scrollView addSubview:view];
     
-    CGSize sizeScrollView = CGSizeMake(self.scrollView.contentSize.width + view.frame.size.width, self.scrollView.bounds.size.height);
-    self.scrollView.contentSize = sizeScrollView;
+    CGSize sizeScrollView = CGSizeMake(scrollView.contentSize.width + view.frame.size.width, scrollView.bounds.size.height);
+    scrollView.contentSize = sizeScrollView;
 }
 
 

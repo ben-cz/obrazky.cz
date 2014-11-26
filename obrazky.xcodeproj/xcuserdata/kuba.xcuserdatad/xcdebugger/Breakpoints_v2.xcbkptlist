@@ -410,12 +410,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "obrazky/Classes/ImageDetailViewController.m"
-            timestampString = "438728987.022075"
+            timestampString = "438734218.258542"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "84"
-            endingLineNumber = "84"
-            landmarkName = "-startAnimationShowWithParentView:imageThbView:imageInfo:"
+            startingLineNumber = "82"
+            endingLineNumber = "82"
+            landmarkName = "-showWithParentView:imageThbView:imageInfo:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -426,12 +426,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "obrazky/Classes/ImageDetailViewController.m"
-            timestampString = "438733609.76472"
+            timestampString = "438734592.403534"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "129"
-            endingLineNumber = "129"
-            landmarkName = "-startAnimationShowWithParentView:imageThbView:imageInfo:"
+            startingLineNumber = "121"
+            endingLineNumber = "121"
+            landmarkName = "-showWithParentView:imageThbView:imageInfo:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -442,11 +442,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "obrazky/Classes/ImageDetailViewController.m"
-            timestampString = "438733609.76472"
+            timestampString = "438734467.909047"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "160"
-            endingLineNumber = "160"
+            startingLineNumber = "154"
+            endingLineNumber = "154"
             landmarkName = "-setImage:toImageDetailView:"
             landmarkType = "5">
          </BreakpointContent>
@@ -458,12 +458,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "obrazky/Classes/ImageDetailViewController.m"
-            timestampString = "438733609.76472"
+            timestampString = "438734467.909047"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "181"
-            endingLineNumber = "181"
-            landmarkName = "-addRightToScrollListView:"
+            startingLineNumber = "175"
+            endingLineNumber = "175"
+            landmarkName = "-addRightToScrollView:view:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -474,12 +474,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "obrazky/Classes/ImageDetailViewController.m"
-            timestampString = "438733609.76472"
+            timestampString = "438734467.909047"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "179"
-            endingLineNumber = "179"
-            landmarkName = "-addRightToScrollListView:"
+            startingLineNumber = "173"
+            endingLineNumber = "173"
+            landmarkName = "-addRightToScrollView:view:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -490,12 +490,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "obrazky/Classes/ImageDetailViewController.m"
-            timestampString = "438733609.76472"
+            timestampString = "438734467.909047"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "184"
-            endingLineNumber = "184"
-            landmarkName = "-addRightToScrollListView:"
+            startingLineNumber = "178"
+            endingLineNumber = "178"
+            landmarkName = "-addRightToScrollView:view:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -596,11 +596,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "obrazky/Classes/ImageDetailViewController.m"
-            timestampString = "438733609.76472"
+            timestampString = "438734467.909047"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "152"
-            endingLineNumber = "152"
+            startingLineNumber = "145"
+            endingLineNumber = "145"
             landmarkName = "-createImageSlideView"
             landmarkType = "5">
          </BreakpointContent>
@@ -612,12 +612,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "obrazky/Classes/ImageDetailViewController.m"
-            timestampString = "438728987.022075"
+            timestampString = "438734218.258542"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "85"
-            endingLineNumber = "85"
-            landmarkName = "-startAnimationShowWithParentView:imageThbView:imageInfo:"
+            startingLineNumber = "83"
+            endingLineNumber = "83"
+            landmarkName = "-showWithParentView:imageThbView:imageInfo:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -628,11 +628,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "obrazky/Classes/ImageDetailViewController.m"
-            timestampString = "438733609.76472"
+            timestampString = "438734467.909047"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "214"
-            endingLineNumber = "214"
+            startingLineNumber = "208"
+            endingLineNumber = "208"
             landmarkName = "-dismissModalButtonAction:"
             landmarkType = "5">
          </BreakpointContent>
@@ -724,11 +724,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "obrazky/Classes/ImageDetailViewController.m"
-            timestampString = "438733609.76472"
+            timestampString = "438734467.909047"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "153"
-            endingLineNumber = "153"
+            startingLineNumber = "146"
+            endingLineNumber = "146"
             landmarkName = "-createImageSlideView"
             landmarkType = "5">
          </BreakpointContent>
@@ -740,11 +740,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "obrazky/Classes/ImageDetailViewController.m"
-            timestampString = "438733609.76472"
+            timestampString = "438734467.909047"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "166"
-            endingLineNumber = "166"
+            startingLineNumber = "160"
+            endingLineNumber = "160"
             landmarkName = "-setImage:toImageDetailView:"
             landmarkType = "5">
          </BreakpointContent>
@@ -756,12 +756,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "obrazky/Classes/ImageDetailViewController.m"
-            timestampString = "438733609.76472"
+            timestampString = "438734467.909047"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "178"
-            endingLineNumber = "178"
-            landmarkName = "-addRightToScrollListView:"
+            startingLineNumber = "172"
+            endingLineNumber = "172"
+            landmarkName = "-addRightToScrollView:view:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -772,12 +772,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "obrazky/Classes/ImageDetailViewController.m"
-            timestampString = "438733609.76472"
+            timestampString = "438734467.909047"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "183"
-            endingLineNumber = "183"
-            landmarkName = "-addRightToScrollListView:"
+            startingLineNumber = "177"
+            endingLineNumber = "177"
+            landmarkName = "-addRightToScrollView:view:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -788,11 +788,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "obrazky/Classes/ImageDetailViewController.m"
-            timestampString = "438733609.76472"
+            timestampString = "438734467.909047"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "292"
-            endingLineNumber = "292"
+            startingLineNumber = "290"
+            endingLineNumber = "290"
             landmarkName = "-cacheImage:setToImageDetailView:"
             landmarkType = "5">
          </BreakpointContent>
@@ -804,11 +804,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "obrazky/Classes/ImageDetailViewController.m"
-            timestampString = "438733609.76472"
+            timestampString = "438734467.909047"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "308"
-            endingLineNumber = "308"
+            startingLineNumber = "306"
+            endingLineNumber = "306"
             landmarkName = "-cacheImage:setToImageDetailView:"
             landmarkType = "5">
          </BreakpointContent>
@@ -825,7 +825,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "75"
             endingLineNumber = "75"
-            landmarkName = "-startAnimationShowWithParentView:imageThbView:imageInfo:"
+            landmarkName = "-showWithParentView:imageThbView:imageInfo:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -884,12 +884,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "obrazky/Classes/ImageDetailViewController.m"
-            timestampString = "438728987.022075"
+            timestampString = "438734218.258542"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "83"
-            endingLineNumber = "83"
-            landmarkName = "-startAnimationShowWithParentView:imageThbView:imageInfo:"
+            startingLineNumber = "81"
+            endingLineNumber = "81"
+            landmarkName = "-showWithParentView:imageThbView:imageInfo:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -916,11 +916,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "obrazky/Classes/ImageDetailViewController.m"
-            timestampString = "438733609.76472"
+            timestampString = "438734467.909047"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "230"
-            endingLineNumber = "230"
+            startingLineNumber = "227"
+            endingLineNumber = "227"
             landmarkName = "-dismissModalButtonAction:"
             landmarkType = "5">
          </BreakpointContent>
@@ -964,7 +964,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "obrazky/Classes/ImageDetailViewController.m"
-            timestampString = "438733609.76472"
+            timestampString = "438735312.969413"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "310"
@@ -980,76 +980,60 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "obrazky/Classes/ImageDetailViewController.m"
-            timestampString = "438733167.405163"
+            timestampString = "438734218.258542"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "110"
+            endingLineNumber = "110"
+            landmarkName = "-showWithParentView:imageThbView:imageInfo:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "obrazky/Classes/ImageDetailViewController.m"
+            timestampString = "438734218.258542"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "117"
+            endingLineNumber = "117"
+            landmarkName = "-showWithParentView:imageThbView:imageInfo:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "obrazky/Classes/ImageDetailViewController.m"
+            timestampString = "438734218.258542"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "114"
             endingLineNumber = "114"
-            landmarkName = "-startAnimationShowWithParentView:imageThbView:imageInfo:"
+            landmarkName = "-showWithParentView:imageThbView:imageInfo:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "No"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "obrazky/Classes/ImageDetailViewController.m"
-            timestampString = "438733609.76472"
+            timestampString = "438735046.9963"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "124"
-            endingLineNumber = "124"
-            landmarkName = "-startAnimationShowWithParentView:imageThbView:imageInfo:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "obrazky/Classes/ImageDetailViewController.m"
-            timestampString = "438733609.76472"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "121"
-            endingLineNumber = "121"
-            landmarkName = "-startAnimationShowWithParentView:imageThbView:imageInfo:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "obrazky/Classes/ImageDetailViewController.m"
-            timestampString = "438732841.349705"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "104"
-            endingLineNumber = "104"
-            landmarkName = "-startAnimationShowWithParentView:imageThbView:imageInfo:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "obrazky/Classes/ImageDetailViewController.m"
-            timestampString = "438733609.76472"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "112"
-            endingLineNumber = "112"
-            landmarkName = "-startAnimationShowWithParentView:imageThbView:imageInfo:"
+            startingLineNumber = "226"
+            endingLineNumber = "226"
+            landmarkName = "-dismissModalButtonAction:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

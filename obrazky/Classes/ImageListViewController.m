@@ -200,7 +200,7 @@
     ImageDetailViewController *detailViewController = [[ImageDetailViewController alloc] initWithImageInfoList:self.imagesInfoList];
     detailViewController.delegate = self;
     ImageInfo *imageInfo = [self.imagesInfoList objectAtIndex:imageView.tag];
-    [detailViewController startAnimationShowWithParentView:self imageThbView:imageView imageInfo:imageInfo];
+    [detailViewController showWithParentView:self imageThbView:imageView imageInfo:imageInfo];
 }
 
 #pragma mark ImageDetailViewControllerDelegate
