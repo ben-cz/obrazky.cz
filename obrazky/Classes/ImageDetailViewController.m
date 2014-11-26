@@ -50,7 +50,7 @@
 }
 
 -(void) setControllView{
-    _navBar = [[UINavigationBar alloc]initWithFrame:CGRectMake(0, 0, self.contentView.frame.size.width, 60)];
+    _navBar = [[UINavigationBar alloc]initWithFrame:CGRectMake(0, 0, self.contentView.frame.size.width, NAVBAR_HEIGHT)];
     [self.view addSubview:_navBar];
     
     UIBarButtonItem *doneItem = [[UIBarButtonItem alloc] initWithTitle:@"Done"
@@ -82,7 +82,7 @@
     
     NSUInteger index = [self.imagesInfoList indexOfObject:imageInfo];
     CGRect screenFrame = parentViewController.view.bounds;
-    CGRect contentFrame = CGRectMake(0, 10, screenFrame.size.width, screenFrame.size.height - 10);
+    CGRect contentFrame = CGRectMake(0, 0, screenFrame.size.width, screenFrame.size.height);
     
     self.view.frame = screenFrame;
     self.contentView.frame = contentFrame;
@@ -96,31 +96,36 @@
     
     self.animateImageDetailView = [[ImageDetailView alloc] initWithFrame:self.contentView.bounds];
     [self.contentView addSubview:self.animateImageDetailView];
-    
-    
-    
-    center = [self.animateImageDetailView convertPoint:imageThbView.center fromView:imageThbView.superview];
-    self.animateImageDetailView.imageView.frame = imageThbView.bounds;
-    [self.animateImageDetailView.imageView setCenter:center];
-    self.animateImageDetailView.imageView.image = imageThbView.image;
 
-    finalImageFrame = self.contentView.bounds;
-    size = [self sizeThatFitsInSize:finalImageFrame.size initialSize:imageThbView.image.size];
+    
+    center = [self.contentView convertPoint:imageThbView.center fromView:imageThbView.superview];
+    //CGRect frame = [sender convertRect:sender.bounds toView:self.view];
+    self.animateImageDetailView.imageView.image = imageThbView.image;
+    self.animateImageDetailView.imageView.frame = imageThbView.bounds;
+    
+    CGSize imageSize = imageThbView.image.size;
+    float scale = imageThbView.frame.size.height/imageSize.height;
+    CGRect imageViewRect = CGRectMake(0, 0, imageSize.width*scale, imageSize.height*scale);
+    self.animateImageDetailView.imageView.frame = imageViewRect;
+    
+    [self.animateImageDetailView.imageView setCenter:center];
+
+    CGPoint centerC = self.contentView.center;
+    size = [self sizeThatFitsInSize:[self imageSizeToFit] initialSize:imageThbView.image.size];
     finalImageFrame.size = size;
     finalImageFrame.origin.x = 0;
     finalImageFrame.origin.y = 0;
+    float scaleFinal = finalImageFrame.size.width/imageViewRect.size.width;
     
-    [UIView animateWithDuration:0.2 delay:0.0 options:UIViewAnimationOptionCurveLinear
+    [UIView animateWithDuration:0.3 delay:0.0 options:UIViewAnimationOptionCurveLinear
                      animations:^{
+                         self.animateImageDetailView.imageView.center = centerC;
+                         self.animateImageDetailView.imageView.transform=CGAffineTransformMakeScale(scaleFinal, scaleFinal);
                          
-                         CGRect frame;
-                         
-                         frame = finalImageFrame;
-                         self.animateImageDetailView.imageView.frame = finalImageFrame;
-                         self.animateImageDetailView.imageView.center = self.animateImageDetailView.center;
                          self.view.layer.backgroundColor = [UIColor blackColor].CGColor;
                      }
                      completion:^(BOOL finished) {
+                         self.animateImageDetailView.imageView.frame = finalImageFrame;
                          [self createImageSlideView];
                          [self.scrollView setContentOffset:CGPointMake((index)*self.contentView.frame.size.width, 0) animated:NO];
                          self.animateImageDetailView.hidden = YES;
@@ -154,7 +159,7 @@
 
 -(void) setImage:(UIImage *)image toImageDetailView:(ImageDetailView *)imageDetailView{
     CGRect frame;
-    CGSize size = [self sizeThatFitsInSize:imageDetailView.frame.size initialSize:image.size];
+    CGSize size = [self sizeThatFitsInSize:[self imageSizeToFit] initialSize:image.size];
     frame.size = size;
     frame.origin.x = 0;
     frame.origin.y = 0;
@@ -162,6 +167,10 @@
     
     [imageDetailView.imageView setImage: image];
 
+}
+
+-(CGSize)imageSizeToFit{
+    return CGSizeMake(self.contentView.bounds.size.width, self.contentView.bounds.size.height - (2*NAVBAR_HEIGHT));
 }
 
 -(void) addRightToScrollListView:(UIView *)view{
@@ -209,9 +218,12 @@
     [ilvc.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:_currentShowPage inSection:0]
                           atScrollPosition:UITableViewScrollPositionMiddle animated:NO];
     
+    self.view.hidden = YES;
+    [self.view removeFromSuperview];
+    [self removeFromParentViewController];
+    /*
+    // Image animation
     
-    // Image animation 
-     
     ImageTVCell *cell = (ImageTVCell *)[ilvc.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:_currentShowPage inSection:0]];
     
     ImageDetailView *imageDetailView = [self.imageDetailViews objectAtIndex:_currentShowPage];
@@ -238,6 +250,7 @@
                          [self.view removeFromSuperview];
                          [self removeFromParentViewController];
                      }];
+     */
     
 }
 

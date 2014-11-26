@@ -13,6 +13,8 @@
 #import "ImageTVCell.h"
 #import "ImageDetailViewControllerDelegate.h"
 
+#define NAVBAR_HEIGHT 60
+
 @interface ImageDetailViewController : UIViewController<UIScrollViewDelegate>
 
 @property (strong, nonatomic) UIView *contentView;
