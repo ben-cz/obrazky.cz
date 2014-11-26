@@ -30,7 +30,7 @@
 
 -(instancetype)initWithImageInfoList:(NSArray *) imagesInfoList;
 
--(void)startAnimationShowWithParentView:(UIViewController *) parentViewController
+-(void)startAnimationShowWithParentView:(id) parentViewController
                            imageThbView:(UIImageView *) imageThbView
                               imageInfo:(ImageInfo *) imageInfo;
 @end

@@ -9,8 +9,9 @@
 #import "ImageDetailViewController.h"
 
 @interface ImageDetailViewController (){
-    NSUInteger _currentShowPage, _prevShowPage;
-    UINavigationController *_navController;
+    NSUInteger _currentShowPage;
+    UINavigationBar *_navBar;
+    BOOL _navBarShow;
 }
 
 @end
@@ -37,6 +38,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    UITapGestureRecognizer *singleTapOnImage = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageTapDetected:)];
+    singleTapOnImage.numberOfTapsRequired = 1;
+    [self.view setUserInteractionEnabled:YES];
+    [self.view addGestureRecognizer:singleTapOnImage];
+    
     [UIBarButtonItem appearance].tintColor = [UIColor whiteColor];
     [[UINavigationBar appearance] setBarTintColor:[UIColor blackColor]];
     
@@ -44,8 +50,8 @@
 }
 
 -(void) setControllView{
-    UINavigationBar *navBar = [[UINavigationBar alloc]initWithFrame:CGRectMake(0, 0, self.contentView.frame.size.width, 50)];
-    [self.contentView addSubview:navBar];
+    _navBar = [[UINavigationBar alloc]initWithFrame:CGRectMake(0, 0, self.contentView.frame.size.width, 60)];
+    [self.view addSubview:_navBar];
     
     UIBarButtonItem *doneItem = [[UIBarButtonItem alloc] initWithTitle:@"Done"
                                                                  style:UIBarButtonItemStyleBordered
@@ -61,10 +67,11 @@
     UINavigationItem *navigItem = [[UINavigationItem alloc] initWithTitle:@""];
     navigItem.rightBarButtonItem = shareItem;
     navigItem.leftBarButtonItem = doneItem;
-    navBar.items = [NSArray arrayWithObjects: navigItem,nil];
+    _navBar.items = [NSArray arrayWithObjects: navigItem,nil];
+    _navBarShow = YES;
 }
 
--(void)startAnimationShowWithParentView:(UIViewController *) parentViewController
+-(void)startAnimationShowWithParentView:(ImageListViewController *) parentViewController
                            imageThbView:(UIImageView *) imageThbView
                               imageInfo:(ImageInfo *) imageInfo{
     _currentShowPage = [self.imagesInfoList indexOfObject:imageInfo];
@@ -86,12 +93,15 @@
     [parentViewController addChildViewController:self];
     [parentViewController.view addSubview:self.view];
     
+    
     self.animateImageDetailView = [[ImageDetailView alloc] initWithFrame:self.contentView.bounds];
     [self.contentView addSubview:self.animateImageDetailView];
     
+    
+    
     center = [self.animateImageDetailView convertPoint:imageThbView.center fromView:imageThbView.superview];
     self.animateImageDetailView.imageView.frame = imageThbView.bounds;
-    self.animateImageDetailView.imageView.center = center;
+    [self.animateImageDetailView.imageView setCenter:center];
     self.animateImageDetailView.imageView.image = imageThbView.image;
 
     finalImageFrame = self.contentView.bounds;
@@ -195,17 +205,13 @@
 -(void)dismissModalButtonAction:(id)sender{
     if ([self.delegate respondsToSelector:@selector(imageDetailViewControllerWillClose:)]) {
         [self.delegate imageDetailViewControllerWillClose:self];
-    }
-    
-    ImageListViewController *ilvc = (ImageListViewController *)self.parentViewController;
+    }ImageListViewController *ilvc = (ImageListViewController *)self.parentViewController;
     [ilvc.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:_currentShowPage inSection:0]
                           atScrollPosition:UITableViewScrollPositionMiddle animated:NO];
     
     
-    self.view.hidden = YES;
-    [self.view removeFromSuperview];
-    [self removeFromParentViewController];
-    /*
+    // Image animation 
+     
     ImageTVCell *cell = (ImageTVCell *)[ilvc.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:_currentShowPage inSection:0]];
     
     ImageDetailView *imageDetailView = [self.imageDetailViews objectAtIndex:_currentShowPage];
@@ -228,9 +234,11 @@
                          self.view.layer.backgroundColor = [UIColor clearColor].CGColor;
                      }
                      completion:^(BOOL finished) {
-                         
+                         self.view.hidden = YES;
+                         [self.view removeFromSuperview];
+                         [self removeFromParentViewController];
                      }];
-     */
+    
 }
 
 - (void) shareAction:(id) sender{
@@ -256,8 +264,13 @@
         // Page has changed, do your thing!
         if(previousPage < [self.imageDetailViews count]){
             _currentShowPage = page;
-            ImageDetailView *idv = [self.imageDetailViews objectAtIndex:previousPage];
+            
+            /***
+             call reset zoom
+            //ImageDetailView *idv = [self.imageDetailViews objectAtIndex:previousPage];
             //[idv zoomBack];
+            ***/
+            
         }
         // Finally, update previous page
         previousPage = page;
@@ -298,6 +311,29 @@
     
     if (image != nil) {
         [self setImage:image toImageDetailView:imageDetailView];
+    }
+}
+
+-(void)imageTapDetected: (UIGestureRecognizer *)gestureRecognizer{
+    if (_navBarShow) {
+        CGRect finalFrame = CGRectMake(_navBar.frame.origin.x, -_navBar.frame.size.height, _navBar.frame.size.width, _navBar.frame.size.height);
+        [UIView animateWithDuration:0.3 delay:0.0 options:UIViewAnimationOptionCurveLinear
+                         animations:^{
+                             _navBar.frame = finalFrame;
+                         }
+                         completion:nil];
+        [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationSlide];
+        _navBarShow = NO;
+    }
+    else{
+        CGRect finalFrame = CGRectMake(_navBar.frame.origin.x, 0, _navBar.frame.size.width, _navBar.frame.size.height);
+        [UIView animateWithDuration:0.3 delay:0.0 options:UIViewAnimationOptionCurveLinear
+                         animations:^{
+                             _navBar.frame = finalFrame;
+                         }
+                         completion:nil];
+        [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationSlide];
+        _navBarShow = YES;
     }
 }
 

@@ -49,21 +49,21 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    NSLog(@"%@", tableView);
-    // Return the number of sections.
     return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    NSLog(@"[self.imagesInfoList count] %d", [self.imagesInfoList count]);
     NSInteger numberOfRows;
-    numberOfRows = [self.imagesInfoList count] + 1;
+    if([self.imagesInfoList count] > 0)
+        numberOfRows = [self.imagesInfoList count] + 1;
+    else
+        numberOfRows = 0;
+    
     return numberOfRows;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"refresh row: %d", indexPath.row);
     if (indexPath.row == [self.imagesInfoList count]) {
         UIActivityIndicatorView *activityIndicator = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
         [activityIndicator startAnimating];
@@ -111,7 +111,7 @@
 }
 
 #pragma mark image cache
-//Image thb cacher
+//Image thb 
 -(void) setImage:(ImageInfo *) imageInfo forImageView:(UIImageView *)imageView{
     if(imageInfo.imageThb == nil){
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -167,7 +167,7 @@
     [self.imagesInfoList addObjectsFromArray: imageList];
     
     [self.tableView reloadData];
-    [self.tableView reloadRowsAtIndexPaths:[self.tableView indexPathsForVisibleRows] withRowAnimation:UITableViewRowAnimationFade];
+    
     [self.viewPlaceholder removeFromSuperview];
     self.tableView.hidden = NO;
 }
