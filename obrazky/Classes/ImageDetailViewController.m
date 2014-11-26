@@ -36,14 +36,42 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [UIBarButtonItem appearance].tintColor = [UIColor whiteColor];
+    [[UINavigationBar appearance] setBarTintColor:[UIColor blackColor]];
+    
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
-    //[self setNeedsStatusBarAppearanceUpdate];
+}
+
+-(void) setControllView{
+    UINavigationBar *navBar = [[UINavigationBar alloc]initWithFrame:CGRectMake(0, 0, self.contentView.frame.size.width, 50)];
+    [self.contentView addSubview:navBar];
+    
+    UIBarButtonItem *doneItem = [[UIBarButtonItem alloc] initWithTitle:@"Done"
+                                                                 style:UIBarButtonItemStyleBordered
+                                                                target:self action:@selector(dismissModalButtonAction:)];
+    
+    UIBarButtonItem *shareItem = [[UIBarButtonItem alloc]
+                                  initWithBarButtonSystemItem:UIBarButtonSystemItemAction
+                                  target:self
+                                  action:@selector(shareAction:)];
+    
+    
+    
+    UINavigationItem *navigItem = [[UINavigationItem alloc] initWithTitle:@""];
+    navigItem.rightBarButtonItem = shareItem;
+    navigItem.leftBarButtonItem = doneItem;
+    navBar.items = [NSArray arrayWithObjects: navigItem,nil];
 }
 
 -(void)startAnimationShowWithParentView:(UIViewController *) parentViewController
                            imageThbView:(UIImageView *) imageThbView
                               imageInfo:(ImageInfo *) imageInfo{
     _currentShowPage = [self.imagesInfoList indexOfObject:imageInfo];
+    
+    CGSize size;
+    CGRect finalImageFrame;
+    CGPoint center;
     
     NSUInteger index = [self.imagesInfoList indexOfObject:imageInfo];
     CGRect screenFrame = parentViewController.view.bounds;
@@ -61,24 +89,16 @@
     self.animateImageDetailView = [[ImageDetailView alloc] initWithFrame:self.contentView.bounds];
     [self.contentView addSubview:self.animateImageDetailView];
     
-    CGPoint center = [self.animateImageDetailView convertPoint:imageThbView.center fromView:imageThbView.superview];
+    center = [self.animateImageDetailView convertPoint:imageThbView.center fromView:imageThbView.superview];
     self.animateImageDetailView.imageView.frame = imageThbView.bounds;
     self.animateImageDetailView.imageView.center = center;
     self.animateImageDetailView.imageView.image = imageThbView.image;
 
-    CGRect finalImageFrame = self.contentView.bounds;
-    
-    CGSize size;
-    
+    finalImageFrame = self.contentView.bounds;
     size = [self sizeThatFitsInSize:finalImageFrame.size initialSize:imageThbView.image.size];
     finalImageFrame.size = size;
     finalImageFrame.origin.x = 0;
     finalImageFrame.origin.y = 0;
-    
-    [self printCGRect:finalImageFrame];
-    [self printCGRect:self.animateImageDetailView.imageView.frame];
-    [self printCGRect:self.animateImageDetailView.imageView.bounds];
-    [self printCGRect:imageThbView.frame];
     
     [UIView animateWithDuration:0.2 delay:0.0 options:UIViewAnimationOptionCurveLinear
                      animations:^{
@@ -92,7 +112,7 @@
                      }
                      completion:^(BOOL finished) {
                          [self createImageSlideView];
-                         [self.scrollView setContentOffset:CGPointMake((index)*320, 0) animated:NO];
+                         [self.scrollView setContentOffset:CGPointMake((index)*self.contentView.frame.size.width, 0) animated:NO];
                          self.animateImageDetailView.hidden = YES;
                          [self setControllView];
                      }];
@@ -145,10 +165,6 @@
     self.scrollView.contentSize = sizeScrollView;
 }
 
--(void) printCGRect:(CGRect) rect{
-    NSLog(@"x:%f y:%f width:%f height:%f",rect.origin.x, rect.origin.y,rect.size.width, rect.size.height);
-}
-
 
 - (CGSize)sizeThatFitsInSize:(CGSize)boundingSize initialSize:(CGSize)initialSize
 {
@@ -174,21 +190,7 @@
     return fittingSize;
 }
 
--(void) setControllView{
-    UIView *controllView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.contentView.frame.size.width, 40)];
-    [self.contentView addSubview:controllView];
-    [controllView setBackgroundColor:[UIColor blackColor]];
-    
-    //add button
-    UIButton *button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    [button addTarget:self
-               action:@selector(dismissModalButtonAction:)
-     forControlEvents:UIControlEventTouchUpInside];
-    [button setTitle:NSLocalizedString(@"Done", nil) forState:UIControlStateNormal];
-    button.frame = CGRectMake( 20.0, 20.0, 50.0, 20.0);
-    [button setTitleColor:[UIColor whiteColor]  forState:UIControlStateNormal];
-    [controllView addSubview:button];
-}
+#pragma mark button actions
 
 -(void)dismissModalButtonAction:(id)sender{
     if ([self.delegate respondsToSelector:@selector(imageDetailViewControllerWillClose:)]) {
@@ -231,6 +233,39 @@
      */
 }
 
+- (void) shareAction:(id) sender{
+    ImageInfo *imageInfo = [self.imagesInfoList objectAtIndex:_currentShowPage];
+    
+    NSMutableArray *sharingItems = [NSMutableArray new];
+    
+    [sharingItems addObject:imageInfo.image];
+    
+    UIActivityViewController *activityController = [[UIActivityViewController alloc] initWithActivityItems:sharingItems applicationActivities:nil];
+    
+    [self presentViewController:activityController animated:YES completion:nil];
+}
+
+#pragma mark detection page
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    static NSUInteger previousPage = 0;
+    CGFloat pageWidth = scrollView.frame.size.width;
+    float fractionalPage = scrollView.contentOffset.x / pageWidth;
+    NSInteger page = lround(fractionalPage);
+    if (previousPage != page) {
+        // Page has changed, do your thing!
+        if(previousPage < [self.imageDetailViews count]){
+            _currentShowPage = page;
+            ImageDetailView *idv = [self.imageDetailViews objectAtIndex:previousPage];
+            //[idv zoomBack];
+        }
+        // Finally, update previous page
+        previousPage = page;
+    }
+}
+
+#pragma mark cache
+
 - (void) cacheImage:(ImageInfo *) imageInfo setToImageDetailView:(ImageDetailView *)imageDetailView{
     __block NSUInteger idx = [self.imageDetailViews indexOfObject:imageDetailView];
     UIImage *image;
@@ -263,23 +298,6 @@
     
     if (image != nil) {
         [self setImage:image toImageDetailView:imageDetailView];
-    }
-}
-
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    static NSUInteger previousPage = 0;
-    CGFloat pageWidth = scrollView.frame.size.width;
-    float fractionalPage = scrollView.contentOffset.x / pageWidth;
-    NSInteger page = lround(fractionalPage);
-    if (previousPage != page) {
-        // Page has changed, do your thing!
-        if(previousPage < [self.imageDetailViews count]){
-            _currentShowPage = page;
-            ImageDetailView *idv = [self.imageDetailViews objectAtIndex:previousPage];
-            //[idv zoomBack];
-        }
-        // Finally, update previous page
-        previousPage = page;
     }
 }
 

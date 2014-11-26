@@ -63,7 +63,6 @@
                     </view>
                     <connections>
                         <outlet property="imageSearchBar" destination="DoY-11-zkF" id="1Qd-Yf-GMx"/>
-                        <outlet property="searchDisplayController" destination="WGI-0I-bHO" id="ee6-wA-8fs"/>
                         <outlet property="tableView" destination="ZNG-FI-ixP" id="pXp-Yy-pV7"/>
                     </connections>
                 </viewController>
@@ -74,23 +73,6 @@
                         <outlet property="searchContentsController" destination="giJ-DY-Jxr" id="Yb7-cF-zJH"/>
                         <outlet property="searchResultsDataSource" destination="giJ-DY-Jxr" id="GXL-Jt-BYk"/>
                         <outlet property="searchResultsDelegate" destination="giJ-DY-Jxr" id="7KL-C9-LDP"/>
-                    </connections>
-                </searchDisplayController>
-                <searchDisplayController id="lMy-7U-hNf">
-                    <connections>
-                        <outlet property="delegate" destination="giJ-DY-Jxr" id="brD-4g-Hdz"/>
-                        <outlet property="searchContentsController" destination="giJ-DY-Jxr" id="Pue-hx-EKx"/>
-                        <outlet property="searchResultsDataSource" destination="giJ-DY-Jxr" id="H8u-TS-Oga"/>
-                        <outlet property="searchResultsDelegate" destination="giJ-DY-Jxr" id="eks-mp-lDk"/>
-                    </connections>
-                </searchDisplayController>
-                <searchDisplayController id="WGI-0I-bHO">
-                    <connections>
-                        <outlet property="delegate" destination="giJ-DY-Jxr" id="CmO-Az-HbA"/>
-                        <outlet property="searchBar" destination="DoY-11-zkF" id="rvT-v5-kfo"/>
-                        <outlet property="searchContentsController" destination="giJ-DY-Jxr" id="D73-0j-ej7"/>
-                        <outlet property="searchResultsDataSource" destination="giJ-DY-Jxr" id="twW-dj-T9h"/>
-                        <outlet property="searchResultsDelegate" destination="giJ-DY-Jxr" id="VLx-zO-lce"/>
                     </connections>
                 </searchDisplayController>
             </objects>
