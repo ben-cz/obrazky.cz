@@ -8,10 +8,12 @@
 
 #import "ImageDetailViewController.h"
 
+
 @interface ImageDetailViewController (){
     NSUInteger _currentShowPage;
     UINavigationBar *_navBar;
     BOOL _navBarShow;
+    int _prevStatusBarSetting;
 }
 
 @end
@@ -31,7 +33,6 @@
     
     self.view = [[UIView alloc] init];
     self.contentView = [[UIView alloc] init];
-    
     [self.view addSubview:self.contentView];
 }
 
@@ -46,6 +47,7 @@
     [UIBarButtonItem appearance].tintColor = [UIColor whiteColor];
     [[UINavigationBar appearance] setBarTintColor:[UIColor blackColor]];
     
+    _prevStatusBarSetting = [[UIApplication sharedApplication] statusBarStyle];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
 }
 
@@ -76,8 +78,6 @@
                               imageInfo:(ImageInfo *) imageInfo{
     _currentShowPage = [self.imagesInfoList indexOfObject:imageInfo];
     
-    CGRect finalImageFrame;
-    
     NSUInteger index = [self.imagesInfoList indexOfObject:imageInfo];
     CGRect screenFrame = parentViewController.view.bounds;
     CGRect contentFrame = CGRectMake(0, 0, screenFrame.size.width, screenFrame.size.height);
@@ -107,7 +107,7 @@
 
     //get scale
     CGSize finalImageSize;
-    finalImageSize = [self sizeThatFitsInSize:[self imageSizeToFit] initialSize:imageThbView.image.size];
+    finalImageSize = [self.animateImageDetailView getImageViewSize:imageThbView.image];
     float scaleFinal = finalImageSize.width/imageViewRect.size.width;
     
     [UIView animateWithDuration:0.3 delay:0.0 options:UIViewAnimationOptionCurveLinear
@@ -121,131 +121,40 @@
                          self.scrollView = [self createImageSlideView];
                          [self.scrollView setContentOffset:CGPointMake((index)*self.contentView.frame.size.width, 0) animated:NO];
                          self.animateImageDetailView.hidden = YES;
-                         
                          [self setControllView];
                      }];
     
     
 }
 
--(UIScrollView *) createImageSlideView{
-    UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:self.contentView.bounds];
+-(ImageDetailScrollerView *) createImageSlideView{
+    ImageDetailScrollerView *scrollView = [[ImageDetailScrollerView alloc] initWithFrame:self.contentView.bounds];
     
     [self.contentView addSubview:scrollView];
-    
-    scrollView.showsVerticalScrollIndicator = NO;
-    scrollView.showsHorizontalScrollIndicator = NO;
-    scrollView.decelerationRate = UIScrollViewDecelerationRateFast;
-    scrollView.delegate = self;
-    scrollView.pagingEnabled = YES;
-    scrollView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     
     for (ImageInfo *imageInfo in self.imagesInfoList) {
         CGRect rec = self.contentView.bounds;
         ImageDetailView *idv = [[ImageDetailView alloc]initWithFrame: rec];
         [self.imageDetailViews addObject:idv];
-        [self setImage:[[UIImage alloc] init] toImageDetailView:idv];
-        [self cacheImage:imageInfo setToImageDetailView:idv];
-        [self addRightToScrollView:scrollView view:idv];
+        [idv setImageViewWithImageInfo:imageInfo];
+        [scrollView addImageDetailView:idv ];
     }
     return scrollView;
-}
-
--(void) setImage:(UIImage *)image toImageDetailView:(ImageDetailView *)imageDetailView{
-    CGRect frame;
-    CGSize size = [self sizeThatFitsInSize:[self imageSizeToFit] initialSize:image.size];
-    frame.size = size;
-    frame.origin.x = 0;
-    frame.origin.y = 0;
-    [imageDetailView setImageViewFrame:frame];
-    
-    [imageDetailView.imageView setImage: image];
-
-}
-
--(CGSize)imageSizeToFit{
-    return CGSizeMake(self.contentView.bounds.size.width, self.contentView.bounds.size.height - (2*NAVBAR_HEIGHT));
-}
-
--(void) addRightToScrollView: (UIScrollView *) scrollView view:(UIView *)view{
-    
-    CGRect frame = CGRectMake(scrollView.contentSize.width, 0, view.frame.size.width, view.frame.size.height);
-    view.frame = frame;
-    
-    [scrollView addSubview:view];
-    
-    CGSize sizeScrollView = CGSizeMake(scrollView.contentSize.width + view.frame.size.width, scrollView.bounds.size.height);
-    scrollView.contentSize = sizeScrollView;
-}
-
-
-- (CGSize)sizeThatFitsInSize:(CGSize)boundingSize initialSize:(CGSize)initialSize
-{
-    if (initialSize.width == 0 || initialSize.height == 0 ) {
-        return CGSizeZero;
-    }
-    
-    CGSize fittingSize;
-    
-    CGFloat widthRatio;
-    CGFloat heightRatio;
-    
-    widthRatio = boundingSize.width / initialSize.width;
-    heightRatio = boundingSize.height / initialSize.height;
-    
-    if (widthRatio < heightRatio){
-        fittingSize = CGSizeMake(boundingSize.width, floorf(initialSize.height * widthRatio));
-    }
-    else{
-        fittingSize = CGSizeMake(floorf(initialSize.width * heightRatio), boundingSize.height);
-    }
-    
-    return fittingSize;
 }
 
 #pragma mark button actions
 
 -(void)dismissModalButtonAction:(id)sender{
-    if ([self.delegate respondsToSelector:@selector(imageDetailViewControllerWillClose:)]) {
-        [self.delegate imageDetailViewControllerWillClose:self];
-    }ImageListViewController *ilvc = (ImageListViewController *)self.parentViewController;
+    [[UIApplication sharedApplication] setStatusBarStyle:_prevStatusBarSetting];
+    [self setNeedsStatusBarAppearanceUpdate];
+    
+    ImageListViewController *ilvc = (ImageListViewController *)self.parentViewController;
     [ilvc.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:_currentShowPage inSection:0]
                           atScrollPosition:UITableViewScrollPositionMiddle animated:NO];
     
     self.view.hidden = YES;
     [self.view removeFromSuperview];
     [self removeFromParentViewController];
-    /*
-    // Image animation
-    
-    ImageTVCell *cell = (ImageTVCell *)[ilvc.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:_currentShowPage inSection:0]];
-    
-    ImageDetailView *imageDetailView = [self.imageDetailViews objectAtIndex:_currentShowPage];
-    
-    CGRect finalImageFrame;
-    CGPoint center = [self.contentView convertPoint:cell.imageView.center fromView:cell.imageView.superview];
-    CGSize size = cell.imageView.frame.size;
-    finalImageFrame.size = size;
-    finalImageFrame.origin.x = 0;
-    finalImageFrame.origin.y = 0;
-    
-    [UIView animateWithDuration:0.2 delay:0.0 options:UIViewAnimationOptionCurveLinear
-                     animations:^{
-                         
-                         CGRect frame;
-                         
-                         frame = finalImageFrame;
-                         imageDetailView.imageView.frame = finalImageFrame;
-                         imageDetailView.imageView.center = center;
-                         self.view.layer.backgroundColor = [UIColor clearColor].CGColor;
-                     }
-                     completion:^(BOOL finished) {
-                         self.view.hidden = YES;
-                         [self.view removeFromSuperview];
-                         [self removeFromParentViewController];
-                     }];
-     */
-    
 }
 
 - (void) shareAction:(id) sender{
@@ -285,41 +194,6 @@
 }
 
 #pragma mark cache
-
-- (void) cacheImage:(ImageInfo *) imageInfo setToImageDetailView:(ImageDetailView *)imageDetailView{
-    __block NSUInteger idx = [self.imageDetailViews indexOfObject:imageDetailView];
-    UIImage *image;
-    if([imageInfo image] == nil){
-        if ([imageInfo imageThb] == nil) {
-            image = nil;
-        }
-        else{
-            image = [imageInfo imageThb];
-        }
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            NSData *imgData = [NSData dataWithContentsOfURL:[NSURL URLWithString: imageInfo.url]];
-            if (imgData) {
-                UIImage *imageDownload = [UIImage imageWithData:imgData];
-                if (imageDownload) {
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        [imageInfo setImage:imageDownload];
-                        idx = [[self.scrollView subviews] indexOfObject:imageDetailView];
-                        if (idx) {
-                            [imageDetailView.imageView setImage:imageDownload];
-                        }
-                    });
-                }
-            }
-        });
-    }
-    else{
-        image = [imageInfo image];
-    }
-    
-    if (image != nil) {
-        [self setImage:image toImageDetailView:imageDetailView];
-    }
-}
 
 -(void)imageTapDetected: (UIGestureRecognizer *)gestureRecognizer{
     if (_navBarShow) {

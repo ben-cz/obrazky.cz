@@ -198,14 +198,8 @@
     
     UIImageView *imageView = (UIImageView *)gestureRecognizer.view;
     ImageDetailViewController *detailViewController = [[ImageDetailViewController alloc] initWithImageInfoList:self.imagesInfoList];
-    detailViewController.delegate = self;
     ImageInfo *imageInfo = [self.imagesInfoList objectAtIndex:imageView.tag];
     [detailViewController showWithParentView:self imageThbView:imageView imageInfo:imageInfo];
 }
 
-#pragma mark ImageDetailViewControllerDelegate
--(void)imageDetailViewControllerWillClose:(ImageDetailViewController *)imageDetailController{
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
-    [self setNeedsStatusBarAppearanceUpdate];
-}
 @end

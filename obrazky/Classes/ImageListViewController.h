@@ -11,14 +11,13 @@
 #import "ImageTVCell.h"
 #import "ImageInfo.h"
 #import "ImageDetailViewController.h"
-#import "ImageDetailViewControllerDelegate.h"
 
 #define CELL_IDENTIFIER @"imageCell"
 
 #define SEARCH_FROM 1
 #define SEARCH_STEP 10
 
-@interface ImageListViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, UISearchDisplayDelegate, ImageListResourcesDelegate, ImageDetailViewControllerDelegate>
+@interface ImageListViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, UISearchDisplayDelegate, ImageListResourcesDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property IBOutlet UISearchBar *imageSearchBar;

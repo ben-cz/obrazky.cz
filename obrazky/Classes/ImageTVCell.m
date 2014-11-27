@@ -17,8 +17,6 @@
     self = [super init];
     if (self) {
         // Initialization code
-        
-        
     }
     return self;
 }

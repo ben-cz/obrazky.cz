@@ -16,6 +16,7 @@
 		8C98CF841A26073F00D5F238 /* TFHpple.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C98CF7F1A26073F00D5F238 /* TFHpple.m */; };
 		8C98CF851A26073F00D5F238 /* TFHppleElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C98CF811A26073F00D5F238 /* TFHppleElement.m */; };
 		8C98CF861A26073F00D5F238 /* XPathQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C98CF831A26073F00D5F238 /* XPathQuery.m */; };
+		8CC4E7781A272DB900FF1288 /* ImageDetailScrollerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CC4E7771A272DB900FF1288 /* ImageDetailScrollerView.m */; };
 		8CCEBB3D1A207BCA0079C139 /* ImageViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CCEBB3C1A207BCA0079C139 /* ImageViewCell.xib */; };
 		8CFC8F471A1D1D51009AC450 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CFC8F461A1D1D51009AC450 /* main.m */; };
 		8CFC8F4A1A1D1D51009AC450 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CFC8F491A1D1D51009AC450 /* AppDelegate.m */; };
@@ -48,7 +49,6 @@
 		8C98CF721A24AB5900D5F238 /* ImageDetailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ImageDetailView.h; path = Classes/ImageDetailView.h; sourceTree = "<group>"; };
 		8C98CF731A24AB5900D5F238 /* ImageDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ImageDetailView.m; path = Classes/ImageDetailView.m; sourceTree = "<group>"; };
 		8C98CF771A25E8AB00D5F238 /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
-		8C98CF7A1A26004E00D5F238 /* ImageDetailViewControllerDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ImageDetailViewControllerDelegate.h; path = Classes/ImageDetailViewControllerDelegate.h; sourceTree = "<group>"; };
 		8C98CF7B1A26072100D5F238 /* ImageListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ImageListViewController.h; path = Classes/ImageListViewController.h; sourceTree = "<group>"; };
 		8C98CF7C1A26072100D5F238 /* ImageListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ImageListViewController.m; path = Classes/ImageListViewController.m; sourceTree = "<group>"; };
 		8C98CF7E1A26073F00D5F238 /* TFHpple.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TFHpple.h; path = Classes/foreign/TFHpple.h; sourceTree = "<group>"; };
@@ -57,6 +57,8 @@
 		8C98CF811A26073F00D5F238 /* TFHppleElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TFHppleElement.m; path = Classes/foreign/TFHppleElement.m; sourceTree = "<group>"; };
 		8C98CF821A26073F00D5F238 /* XPathQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XPathQuery.h; path = Classes/foreign/XPathQuery.h; sourceTree = "<group>"; };
 		8C98CF831A26073F00D5F238 /* XPathQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XPathQuery.m; path = Classes/foreign/XPathQuery.m; sourceTree = "<group>"; };
+		8CC4E7761A272DB900FF1288 /* ImageDetailScrollerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ImageDetailScrollerView.h; path = Classes/ImageDetailScrollerView.h; sourceTree = "<group>"; };
+		8CC4E7771A272DB900FF1288 /* ImageDetailScrollerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ImageDetailScrollerView.m; path = Classes/ImageDetailScrollerView.m; sourceTree = "<group>"; };
 		8CCEBB3C1A207BCA0079C139 /* ImageViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImageViewCell.xib; sourceTree = "<group>"; };
 		8CFC8F411A1D1D51009AC450 /* obrazky.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = obrazky.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8CFC8F451A1D1D51009AC450 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -126,6 +128,8 @@
 				8C249EC71A1F881800BC57F6 /* ImageTVCell.m */,
 				8C98CF721A24AB5900D5F238 /* ImageDetailView.h */,
 				8C98CF731A24AB5900D5F238 /* ImageDetailView.m */,
+				8CC4E7761A272DB900FF1288 /* ImageDetailScrollerView.h */,
+				8CC4E7771A272DB900FF1288 /* ImageDetailScrollerView.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -137,7 +141,6 @@
 				8C98CF7C1A26072100D5F238 /* ImageListViewController.m */,
 				8C1BC26D1A233EC7007F4842 /* ImageDetailViewController.h */,
 				8C1BC26E1A233EC7007F4842 /* ImageDetailViewController.m */,
-				8C98CF7A1A26004E00D5F238 /* ImageDetailViewControllerDelegate.h */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -328,6 +331,7 @@
 				8C98CF7D1A26072100D5F238 /* ImageListViewController.m in Sources */,
 				8CFC8F771A1D5030009AC450 /* ImageListResources.m in Sources */,
 				8C98CF841A26073F00D5F238 /* TFHpple.m in Sources */,
+				8CC4E7781A272DB900FF1288 /* ImageDetailScrollerView.m in Sources */,
 				8CFC8F471A1D1D51009AC450 /* main.m in Sources */,
 				8C249EC41A1F816300BC57F6 /* ImageInfo.m in Sources */,
 				8CFC8F731A1D4E31009AC450 /* RESTResources.m in Sources */,

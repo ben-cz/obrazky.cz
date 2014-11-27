@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ImageInfo.h"
 
 @interface ImageDetailView : UIScrollView <UIScrollViewDelegate>{
      CGRect imageViewFrame;
@@ -14,6 +15,8 @@
 
 @property (nonatomic, strong) UIImageView *imageView;
 
--(void) setImageViewFrame: (CGRect) frame;
--(void)zoomBack;
+-(void)resetImageZoom;
+-(void) setImageViewWithImageInfo:(ImageInfo *)imageInfo;
+-(CGSize)imageSizeToFit;
+-(CGSize)getImageViewSize: (UIImage *)image;
 @end
